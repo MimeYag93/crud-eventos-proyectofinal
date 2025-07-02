@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/api/axios.ts","./src/events/event.service.ts","./src/events/components/eventform.tsx","./src/events/pages/eventcreate.tsx","./src/events/pages/eventedit.tsx","./src/events/pages/eventlist.tsx","./src/events/pages/home.tsx","./src/router/index.tsx","./src/types/event.ts"],"version":"5.8.3"}
