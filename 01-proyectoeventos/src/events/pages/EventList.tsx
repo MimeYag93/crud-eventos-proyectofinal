@@ -26,12 +26,7 @@ export function EventList() {
   return (
    <div className="p-6 max-w-xl mx-auto">
     <h2 className="text-3xl font-bold mb-4 text-center">Lista de Eventos</h2>
-    <button
-      onClick={() => navigate("/eventos/crear")}
-      className="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-    >
-      Crear Evento
-    </button>
+    
     {events.length === 0 ? (
       <p className="text-center text-gray-500">No hay eventos para mostrar.</p>
     ) : (
