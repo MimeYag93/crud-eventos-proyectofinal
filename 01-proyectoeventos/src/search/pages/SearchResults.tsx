@@ -1,19 +1,26 @@
 // Muestra los resultados
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { getEvents } from "../../api/events"; // debes tener una función que reciba filtros
+import { getAllEvents } from "../../api/events"; 
+import type { Event } from "../../types/Event";
 
 export const SearchResults = () => {
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<Event[]>([]);
   const location = useLocation();
 
-  useEffect(() => {
+    useEffect(() => {
     const fetchData = async () => {
-      const params = new URLSearchParams(location.search);
-      const filters = Object.fromEntries(params.entries());
-      const data = await getEvents(filters); // deberás adaptar esta función
-      setResults(data);
+      try {
+        const params = new URLSearchParams(location.search);
+        const filters = Object.fromEntries(params.entries());
+
+        const response = await getAllEvents(filters); 
+        setResults(response.data);                    
+      } catch (error) {
+        console.error("Error al obtener resultados:", error);
+      }
     };
+
     fetchData();
   }, [location]);
 

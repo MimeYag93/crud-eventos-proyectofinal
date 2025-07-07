@@ -23,9 +23,13 @@ export function EventEdit() {
   };
 
   return (
-    <div>
-      <h2>Editar Evento</h2>
-      {event && <EventForm initialData={event} onSubmit={handleUpdate} />}
+  <div className="min-h-screen bg-amber-50 flex items-center justify-center px-4 py-8">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl">
+        <h2 className="text-3xl font-bold mb-6 text-center text-blue-800">
+          Editar Evento
+        </h2>
+        {event && <EventForm initialData={event} onSubmit={handleUpdate} />}
+      </div>
     </div>
   );
 }

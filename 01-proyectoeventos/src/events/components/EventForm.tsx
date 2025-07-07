@@ -9,25 +9,22 @@ interface Props {
 export function EventForm({ initialData = {}, onSubmit }: Props) {
   const [form, setForm] = useState<Omit<Event, "id">>({
     title: initialData.title || "",
-    description: initialData.description || "",
-    date: initialData.date || "",
     location: initialData.location || "",
+    date: initialData.date || "",
     category: initialData.category || "",
-    latitude: initialData.latitude || 0,
-    longitude: initialData.longitude || 0,
+    type: initialData.type || "",
+    lat: initialData.lat || 0,
+    lng: initialData.lng || 0,
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { name, value } = e.target;
-
-    // Convertir valores numéricos correctamente
-    if (name === "latitude" || name === "longitude") {
-      setForm({ ...form, [name]: parseFloat(value) });
-    } else {
-      setForm({ ...form, [name]: value });
-    }
+    setForm({
+      ...form,
+      [name]: name === "lat" || name === "lng" ? parseFloat(value) : value,
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -36,15 +33,80 @@ export function EventForm({ initialData = {}, onSubmit }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="title" placeholder="Título" value={form.title} onChange={handleChange} />
-      <input name="date" type="date" value={form.date} onChange={handleChange} />
-      <input name="location" placeholder="Ubicación" value={form.location} onChange={handleChange} />
-      <input name="category" placeholder="Categoría" value={form.category} onChange={handleChange} />
-      <input name="latitude" type="number" value={form.latitude} onChange={handleChange} />
-      <input name="longitude" type="number" value={form.longitude} onChange={handleChange} />
-      <textarea name="description" placeholder="Descripción" value={form.description} onChange={handleChange} />
-      <button type="submit">Guardar</button>
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg mt-10 space-y-4"
+    >
+      <h2 className="text-2xl font-bold mb-4">Crear / Editar Evento</h2>
+
+      <input
+        name="title"
+        placeholder="Título"
+        value={form.title}
+        onChange={handleChange}
+        className="w-full border border-gray-300 rounded px-3 py-2"
+        required
+      />
+
+      <input
+        name="date"
+        type="date"
+        value={form.date}
+        onChange={handleChange}
+        className="w-full border border-gray-300 rounded px-3 py-2"
+        required
+      />
+
+      <input
+        name="location"
+        placeholder="Ubicación"
+        value={form.location}
+        onChange={handleChange}
+        className="w-full border border-gray-300 rounded px-3 py-2"
+      />
+
+      <input
+        name="category"
+        placeholder="Categoría"
+        value={form.category}
+        onChange={handleChange}
+        className="w-full border border-gray-300 rounded px-3 py-2"
+      />
+
+      <input
+        name="type"
+        placeholder="Tipo de Evento"
+        value={form.type}
+        onChange={handleChange}
+        className="w-full border border-gray-300 rounded px-3 py-2"
+      />
+
+      <input
+        name="lat"
+        type="number"
+        step="any"
+        placeholder="Latitud"
+        value={form.lat}
+        onChange={handleChange}
+        className="w-full border border-gray-300 rounded px-3 py-2"
+      />
+
+      <input
+        name="lng"
+        type="number"
+        step="any"
+        placeholder="Longitud"
+        value={form.lng}
+        onChange={handleChange}
+        className="w-full border border-gray-300 rounded px-3 py-2"
+      />
+
+      <button
+        type="submit"
+        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+      >
+        Guardar
+      </button>
     </form>
   );
 }

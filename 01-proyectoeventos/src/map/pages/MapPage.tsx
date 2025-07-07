@@ -1,14 +1,19 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useEffect, useState } from "react";
-import { getEvents } from "../../api/events"; // debe devolver eventos con lat/lng
+import { getAllEvents } from "../../api/events"; 
+import type { Event } from "../../types/Event";  
 
 export const MapPage = () => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getEvents(); // debe incluir lat/lng
-      setEvents(data);
+      try {
+        const response = await getAllEvents(); 
+        setEvents(response.data);
+      } catch (error) {
+        console.error("Error cargando eventos para el mapa:", error);
+      }
     };
     fetchData();
   }, []);

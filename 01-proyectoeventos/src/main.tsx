@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
-import 'leaflet/dist/leaflet.css';
+import "./index.css";             // tus estilos Tailwind
+import "leaflet/dist/leaflet.css"; // los estilos de Leaflet
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <App />
   </React.StrictMode>
 );
